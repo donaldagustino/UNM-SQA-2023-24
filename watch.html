@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube Video</title>
+    <style>
+      * {
+        margin: 0px;
+      }
+
+      #player {
+        width: 1080px;
+        height: 600px;
+        margin: 24px;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .wrapper-player {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 1920px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper-player">
+      <div id="player"></div>
+    </div>
+    <script>
+      const tag = document.createElement("script");
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      window.onload = function () {
+        const queries = new URLSearchParams(window.location.search);
+        if (queries.get("vId")) {
+          videoId = queries.get("vId");
+          createPlayerIframe(videoId);
+        }
+      };
+
+      const createPlayerIframe = async (videoId) => {
+        document.getElementById(`player`).innerHTML += `
+          <iframe id="player"
+              width="1080" height="600"
+              src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://127.0.0.1:5500/"
+              frameborder="0"
+
+          ></iframe>
+          `;
+
+        new YT.Player(`player`, {
+          height: "1080",
+          width: "600",
+          videoId,
+          playerVars: {
+            autoplay: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+          },
+        });
+      };
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+    </script>
+  </body>
+</html>

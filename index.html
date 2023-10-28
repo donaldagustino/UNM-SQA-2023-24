@@ -11,6 +11,23 @@
 
       .video {
         margin: 8px;
+        position: relative;
+        width: 360px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 4px #37474f;
+      }
+
+      .video .backdrop {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        opacity: 10%;
+        position: absolute;
+        top: 0px;
       }
 
       body {
@@ -68,29 +85,29 @@
       };
 
       const createPlayerIframe = async () => {
-        return new Promise((resolve, reject) => {
-          videos.forEach((item, index) => {
-            document.getElementById(
-              `wrapper-player-${index + 1}`
-            ).innerHTML += `
+        videos.forEach((item, index) => {
+          document.getElementById(`wrapper-player-${index + 1}`).innerHTML += `
             <iframe id="player-${index + 1}"
                 width="360" height="200"
                 src="https://www.youtube.com/embed/${
                   item?.id.videoId
                 }?enablejsapi=1&origin=http://127.0.0.1:5500/"
                 frameborder="0"
-                style="border: solid 4px #37474F"
+
             ></iframe>
+            <a href="./watch.html?vId=${
+              item?.id.videoId
+            }" target="_blank" class="backdrop">
+            </a>
             `;
 
-            players.push(
-              new YT.Player(`player-${index + 1}`, {
-                height: "200",
-                width: "360",
-                videoId: item?.id.videoId,
-              })
-            );
-          });
+          players.push(
+            new YT.Player(`player-${index + 1}`, {
+              height: "200",
+              width: "360",
+              videoId: item?.id.videoId,
+            })
+          );
         });
       };
     </script>
