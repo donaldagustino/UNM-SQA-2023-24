@@ -57,6 +57,13 @@
         <div id="side-videos"></div>
       </div>
     </div>
+
+    <!--Note taking section-->
+    <div class="notes-section">
+      <textarea id="videoNotes" placeholder="Write your notes here..." rows="6" cols="60"></textarea>
+      <button id="saveNoteButton">Save Notes</button>
+    </div>
+
     <script>
       const sideVideosRef = document.getElementById("side-videos");
       const tag = document.createElement("script");
@@ -153,5 +160,6 @@
         });
       };
     </script>
+    <script src="notesHandler.js"></script>
   </body>
 </html>
