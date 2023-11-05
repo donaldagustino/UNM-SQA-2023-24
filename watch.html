@@ -21,12 +21,33 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+      } 
+
+      #videoNotes {
+        width: 100%; /* Make the textarea take up the full width of its container */
+        resize: vertical; /* Allow only vertical resizing */
+        /* Other styles as necessary */
       }
 
       body {
         display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns items to the start of the cross axis */
+      }
+
+      .main-content {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 24px;
+      }
+
+      .notes-section {
+        width: 97.5%; /* Match the width of video player */
+        margin: 10px auto; /* Center the notes-section with automatic horizontal margins */
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in the width calculation */
+        /* Other styles as necessary */
       }
 
       .wrapper-player {
@@ -37,32 +58,35 @@
         max-width: 1920px;
       }
 
-      .video {
-        width: 240px;
-        height: 160px;
-        margin-bottom: 16px;
+      .video-player {
+        width: 100%; /* Use percentage for responsive design */
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
       }
+      
+      .video-player iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
     </style>
   </head>
   <body>
-    <div class="wrapper-player">
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          justify-content: space-evenly;
-        "
-      >
-        <div id="player"></div>
-        <div id="side-videos"></div>
+    <div class="main-content">
+      <div id="player"></div>
+
+      <!--Note taking section-->
+      <div class="notes-section">
+        <textarea id="videoNotes" placeholder="Write your notes here..." rows="6"></textarea>
+        <button id="saveNoteButton">Save Notes</button>
       </div>
     </div>
 
-    <!--Note taking section-->
-    <div class="notes-section">
-      <textarea id="videoNotes" placeholder="Write your notes here..." rows="6" cols="60"></textarea>
-      <button id="saveNoteButton">Save Notes</button>
-    </div>
+    <div id="side-videos"></div>
 
     <script>
       const sideVideosRef = document.getElementById("side-videos");
@@ -100,27 +124,15 @@
       };
 
       const createPlayerIframe = (videoId) => {
-        document.getElementById(`player`).innerHTML += `
-          <iframe id="player"
-              width="1080"
-              height="600"
-              src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://127.0.0.1:5500/"
-              frameborder="0"
-
-          ></iframe>
-          `;
-
-        new YT.Player(`player`, {
-          height: "1080",
-          width: "600",
-          videoId,
-          playerVars: {
-            autoplay: 1,
-          },
-          events: {
-            // onReady: onPlayerReady,
-          },
-        });
+      const playerContainer = document.getElementById('player');
+      playerContainer.innerHTML = `<div class="video-player">
+        <iframe 
+          src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>`;
+      // No need to create a new YT.Player if using iframe directly
       };
 
       function onPlayerReady(event) {
