@@ -7,27 +7,20 @@
     <style>
       * {
         margin: 0px;
-        box-sizing: border-box; /* Handles padding and border in box-sizing */
-      }
-
-      body {
-        background-color: #fafafa; /* Light grey background */
-      }
-
-      .content {
-        /* Contains both sections and align them to the left */
-        padding: 24px;
-      }
-
-      .wrapper-player, .notes-section {
-        width: 100%; /* Take full width of the parent */
-        max-width: 1080px; /* Max width aligned with the video */
       }
 
       #player {
         width: 1080px;
         height: 600px;
         margin: 24px;
+      }
+
+      #side-videos {
+        width: 300px;
+        margin: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       body {
@@ -39,6 +32,7 @@
       .wrapper-player {
         display: flex;
         flex-direction: column;
+        align-items: center;
         width: 100%;
         max-width: 1920px;
       }
@@ -52,15 +46,22 @@
   </head>
   <body>
     <div class="wrapper-player">
-      <div id="player"></div>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+        "
+      >
+        <div id="player"></div>
+        <div id="side-videos"></div>
+      </div>
     </div>
 
-      <!-- Note taking section -->
-      <div class="notes-section">
-        <!-- Controls the width of the textarea and button -->
-        <textarea id="videoNotes" placeholder="Write your notes here..."></textarea>
-        <button id="saveNoteButton">Save Notes</button>
-      </div>
+    <!--Note taking section-->
+    <div class="notes-section">
+      <textarea id="videoNotes" placeholder="Write your notes here..." rows="6" cols="60"></textarea>
+      <button id="saveNoteButton">Save Notes</button>
     </div>
 
     <script>
@@ -159,8 +160,6 @@
         });
       };
     </script>
-
-    <!--Script for taking, saving, loading notes-->
     <script src="notesHandler.js"></script>
   </body>
 </html>
