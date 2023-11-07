@@ -13,6 +13,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('saveNoteButton').addEventListener('click', function() {
         const notes = document.getElementById('videoNotes').value;
         localStorage.setItem('videoNotes-' + videoId, notes);
-        alert('Notes saved!');
+        
+        // Show toast message instead of an alert
+        showToast('Notes saved!');
     });
 });
+
+// Function to show toast message
+function showToast(message) {
+    // Create the toast message element
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = 'toast-message'; // Make sure this class is styled in CSS
+
+    // Append the toast message to body or a specific container
+    document.body.appendChild(toast);
+
+    // Show the toast for 3 seconds before fading out
+    setTimeout(() => {
+        toast.classList.add('fade-out'); // Make sure this class has fade out animation in CSS
+        // After fade out animation, remove the toast message
+        toast.addEventListener('animationend', () => toast.remove());
+    }, 3000);
+
+    // Optionally, remove the toast on click as well
+    toast.addEventListener('click', () => {
+        toast.classList.add('fade-out');
+        toast.addEventListener('animationend', () => toast.remove());
+    });
+}
