@@ -60,6 +60,24 @@
         /* Other styles as necessary */
       }
 
+      .keyword {
+  /* Apply the current .keyword.selected styles to all keywords by default */
+  background-color: #cef; /* Example background color */
+  border-color: #08f;    /* Example border color */
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  /* Add other styling as needed */
+}
+
+.keyword.selected {
+  /* Subdued style for unselected keywords */
+  background-color: #f8f8f8; /* More neutral background color */
+  border-color: #ccc;       /* Standard border color */
+  /* Adjust other styles as needed */
+}
+
       .wrapper-player {
         display: flex;
         flex-direction: column;
@@ -121,9 +139,10 @@
       let activeKeywords = [];
     
       document.addEventListener('DOMContentLoaded', function() {
-        const queries = new URLSearchParams(window.location.search);
-        const videoId = queries.get("vId");
-        const passedKeywords = queries.get("keywords") ? queries.get("keywords").split(',') : [];
+  const queries = new URLSearchParams(window.location.search);
+  const videoId = queries.get("vId");
+  const passedKeywords = queries.get("keywords") ? queries.get("keywords").split(',') : [];
+
     
         // Initialize passed keywords
         passedKeywords.forEach(keyword => {
