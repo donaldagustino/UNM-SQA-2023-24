@@ -16,6 +16,22 @@
         margin: 24px;
       }
 
+      /* Add styles for a button */
+       #saveNoteButton {
+        /* Style your button */
+        padding: 10px 20px;
+        margin-top: 10px; /* Add some space above the button */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #saveNoteButton:hover {
+          background-color: #0056b3;
+      }
+
       #side-videos {
         width: 300px;
         margin: 24px;
@@ -24,10 +40,24 @@
         align-items: center;
       }
 
+      #videoNotes {
+        width: 100%; /* Make the textarea take up the full width of its container */
+        resize: vertical; /* Allow only vertical resizing */
+        /* Other styles as necessary */
+      }
+
       body {
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      .notes-section {
+        width: 97.5%; /* Match the width of video player */
+        margin: 10px auto; /* Center the notes-section with automatic horizontal margins */
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in the width calculation */
+        /* Other styles as necessary */
       }
 
       .wrapper-player {
@@ -71,10 +101,17 @@
         <div style="display: flex; flex-direction: column">
           <div id="player"></div>
           <h3 id="player-title" style="margin: 0 0 0 24px"></h3>
+
+          <div class="notes-section">
+            <textarea id="videoNotes" placeholder="Write your notes here..." rows="6"></textarea>
+            <button id="saveNoteButton">Save Notes</button>
+          </div>
         </div>
+
         <div id="side-videos"></div>
       </div>
     </div>
+    
     <script src="./script.js" type="module"></script>
     <script type="module">
       import { API_KEY } from "./script.js";
@@ -180,5 +217,6 @@
         });
       };
     </script>
+    <script src="notesHandler.js"></script>
   </body>
 </html>
