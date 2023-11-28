@@ -39,7 +39,7 @@
   </div>
 
   <div id="keywords-container">
-    <button class="keyword" data-keyword="SQL">SQL</button>
+    <button class="keyword" data-keyword="SQA">SQA</button>
     <button class="keyword" data-keyword="learning">Learning</button>
     <button class="keyword" data-keyword="python">Python</button>
   </div>
@@ -62,16 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleKeyword(this);
     });
 
-    // Select SQL keyword by default
-    if (button.getAttribute('data-keyword') === 'SQL') {
+    // Select SQA keyword by default
+    if (button.getAttribute('data-keyword') === 'SQA') {
       button.classList.add('selected');
-      activeKeywords.push('SQL');
+      activeKeywords.push('SQA');
     }
   });
 
   document.getElementById('search-container').querySelector('button').addEventListener('click', addKeyword);
 
-  // Perform initial search with SQL keyword
+  // Perform initial search with SQA keyword
   performSearch();
 });
 
