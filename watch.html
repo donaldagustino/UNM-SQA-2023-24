@@ -238,13 +238,10 @@
     document.getElementById('shareButton').addEventListener('click', function () {
       const videoId = new URLSearchParams(window.location.search).get('vId');
       if (videoId) {
-        // Assuming you are on a page like watch.html, modify accordingly if different
         const shareUrl = `${window.location.origin}${window.location.pathname}?vId=${videoId}`;
-        // Copy the shareable URL to the clipboard
-        navigator.clipboard.writeText(shareUrl).then(function () {
+        navigator.clipboard.writeText(shareUrl).then(function () {         // Copies the shareable URL to the clipboard
           console.log('Copying to clipboard was successful!');
-          //alert('Link copied to clipboard!');
-        }, function (err) {
+        }, function (err) {                                                //alert('Link copied to clipboard!');
           console.error('Could not copy text: ', err);
         });
       } else {
