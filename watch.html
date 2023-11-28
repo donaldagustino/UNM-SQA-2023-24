@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube Video</title>
+    <style>
+      * {
+        margin: 0px;
+        font-family: Arial;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Youtube Video</title>
-  <style>
-    * {
-      margin: 0px;
-      font-family: Arial;
-    }
+      #player {
+        width: 1080px;
+        height: 600px;
+        margin: 24px;
+      }
 
-    #player {
-      width: 1080px;
-      height: 600px;
-      margin: 24px;
-    }
+      /* Add styles for a button */
+       #saveNoteButton {
+        /* Style your button */
+        padding: 10px 20px;
+        margin-top: 10px; /* Add some space above the button */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-    /* Add styles for a button */
-    #saveNoteButton {
-      /* Style your button */
-      padding: 10px 20px;
-      margin-top: 10px;
-      /* Add some space above the button */
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+      #saveNoteButton:hover {
+          background-color: #0056b3;
+      }
 
-    #saveNoteButton:hover {
-      background-color: #0056b3;
-    }
-
-    #shareButton {
+      #shareButton {
       padding: 10px 20px;
       margin-top: 10px;
       background-color: green;
@@ -48,194 +46,277 @@
       background-color: rgb(60, 179, 0);
     }
 
-    #side-videos {
-      width: 300px;
-      margin: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+      #side-videos {
+        width: 300px;
+        margin: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    #videoNotes {
-      width: 100%;
-      /* Make the textarea take up the full width of its container */
-      resize: vertical;
-      /* Allow only vertical resizing */
-      /* Other styles as necessary */
-    }
+      #videoNotes {
+        width: 100%; /* Make the textarea take up the full width of its container */
+        resize: vertical; /* Allow only vertical resizing */
+        /* Other styles as necessary */
+      }
 
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    .notes-section {
-      width: 97.5%;
-      /* Match the width of video player */
-      margin: 10px auto;
-      /* Center the notes-section with automatic horizontal margins */
-      padding: 10px;
-      box-sizing: border-box;
-      /* Include padding in the width calculation */
-      /* Other styles as necessary */
-    }
+      .notes-section {
+        width: 97.5%; /* Match the width of video player */
+        margin: 10px auto; /* Center the notes-section with automatic horizontal margins */
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in the width calculation */
+        /* Other styles as necessary */
+      }
 
-    .wrapper-player {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 1920px;
-    }
+      .keyword {
+  /* Apply the current .keyword.selected styles to all keywords by default */
+  background-color: #cef; /* Example background color */
+  border-color: #08f;    /* Example border color */
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  /* Add other styling as needed */
+}
 
-    .video {
-      margin: 8px;
-      position: relative;
-      width: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+.keyword.selected {
+  /* Subdued style for unselected keywords */
+  background-color: #f8f8f8; /* More neutral background color */
+  border-color: #ccc;       /* Standard border color */
+  /* Adjust other styles as needed */
+}
 
-    .video .backdrop {
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      opacity: 10%;
-      position: absolute;
-      top: 0px;
-    }
-  </style>
-</head>
+      .wrapper-player {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1920px;
+      }
 
-<body>
-  <div class="wrapper-player">
-    <div style="
-          display: flex;
-          flex-direction: row;
-          justify-content: space-evenly;
-          width: 100%;
-        ">
-      <div style="display: flex; flex-direction: column">
-        <div id="player"></div>
-        <h3 id="player-title" style="margin: 0 0 0 24px"></h3>
+      .video {
+        margin: 8px;
+        position: relative;
+        width: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        <div class="notes-section">
-          <textarea id="videoNotes" placeholder="Write your notes here..." rows="6"></textarea>
-          <button id="saveNoteButton">Save Notes</button>
-          <button id="shareButton">Share</button>
-        </div>
-      </div>
-
-      <div id="side-videos"></div>
+      .video .backdrop {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        opacity: 10%;
+        position: absolute;
+        top: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Add a keyword..." />
+      <button onclick="addKeyword()">Add</button>
     </div>
-  </div>
 
-  <script src="./script.js" type="module"></script>
-  <script type="module">
-    import { API_KEY } from "./script.js";
+    <div id="keywords-container">
+      <!-- Keywords will be added dynamically -->
+    </div>
 
-    const sideVideosRef = document.getElementById("side-videos");
-    const playerTitleRef = document.getElementById("player-title");
-    const tag = document.createElement("script");
-    const players = [];
+    <div class="wrapper-player">
+      <!-- Video player and side videos layout -->
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 100%;">
+        <div style="display: flex; flex-direction: column">
+          <div id="player"></div>
+          <h3 id="player-title" style="margin: 0 0 0 24px"></h3>
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          <div class="notes-section">
+            <textarea id="videoNotes" placeholder="Write your notes here..." rows="6"></textarea>
+            <button id="saveNoteButton">Save Notes</button>
+            <button id="shareButton">Share</button>
+          </div>
+        </div>
 
-    window.onload = async function () {
-      const queries = new URLSearchParams(window.location.search);
-      const videoId = queries.get("vId");
-      const search = queries.get("search") ? queries.get("search") : "";
+        <div id="side-videos"></div>
+      </div>
+    </div>
 
-      if (videoId) {
-        const response = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}&videoEmbeddable=true`
-        );
+    <script type="module">
+      import { API_KEY } from "./script.js";
+    
+      let activeKeywords = [];
+    
+      document.addEventListener('DOMContentLoaded', async function() {
+  const queries = new URLSearchParams(window.location.search);
+  const videoId = queries.get("vId");
+  const passedKeywords = queries.get("keywords") ? queries.get("keywords").split(',') : [];
 
-        const { items } = await response.json();
-        const video = items.length > 0 && items[0];
+  // Initialize passed keywords
+  passedKeywords.forEach(keyword => {
+    addKeyword(keyword, true);
+  });
+
+  document.getElementById('search-container').querySelector('button').addEventListener('click', addKeyword);
+
+  // Load the main video player if videoId is present
+  if (videoId) {
+    try {
+      const response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}&videoEmbeddable=true`
+      );
+      const { items } = await response.json();
+      if (items.length > 0) {
+        const video = items[0];
         createPlayerIframe(video);
       }
-
-      try {
-        const response = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${search}&maxResults=12&key=${API_KEY}&videoEmbeddable=true`
-        );
-
-        const { items } = await response.json();
-
-        console.log(items);
-
-        const videos = items.filter((item) => item?.id.videoId !== videoId);
-
-        createSideVideosPlayer(items);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const createPlayerIframe = (video) => {
-      playerTitleRef.innerHTML = video.snippet.title;
-      document.getElementById(`player`).innerHTML += `
-          <iframe id="player"
-              width="1080"
-              height="600"
-              src="https://www.youtube.com/embed/${video.id}?enablejsapi=1&origin=http://127.0.0.1:5500/"
-              frameborder="0"
-
-          ></iframe>
-          `;
-
-      new YT.Player(`player`, {
-        height: "1080",
-        width: "600",
-        videoId: video.id,
-        events: {
-          // onReady: onPlayerReady,
-        },
-      });
-    };
-
-    function onPlayerReady(event) {
-      event.target.playVideo();
+    } catch (error) {
+      console.error('Error fetching main video:', error);
     }
+  }
 
-    const createSideVideosPlayer = (videos) => {
-      for (let i = 0; i < videos.length; i++) {
-        sideVideosRef.innerHTML += `<div id="side-video-player-${i + 1
-          }" class="video"></div>`;
-      }
+  // Update the side videos
+  updateVideos();
+});
 
-      videos.forEach((item, index) => {
-        document.getElementById(
-          `side-video-player-${index + 1}`
-        ).innerHTML += `
-            <iframe id="player-${index + 1}"
-                width="240" height="160"
-                src="https://www.youtube.com/embed/${item?.id.videoId
-          }?enablejsapi=1&origin=http://127.0.0.1:5500/"
-                frameborder="0"
+        // Function to add keywords
+        function addKeyword(keywordText, isPassedKeyword = false) {
+          const input = document.getElementById('search-input');
+          const keyword = isPassedKeyword ? keywordText : input.value.trim();
+          if (keyword && !document.querySelector(`[data-keyword="${keyword}"]`)) {
+            const newButton = document.createElement('button');
+            newButton.className = 'keyword'; 
+            newButton.textContent = keyword;
+            newButton.setAttribute('data-keyword', keyword);
+            newButton.addEventListener('click', function() {
+              toggleKeyword(this);
+            });
+            document.getElementById('keywords-container').appendChild(newButton);
+            if (!isPassedKeyword) {
+              input.value = ''; // Clear the input field
+            }
+            if (!activeKeywords.includes(keyword)) {
+              activeKeywords.push(keyword); // Add to active keywords
+            }
+            updateVideos(); // Update videos based on new keyword
+          }
+        }
+    
+        // Function to toggle keyword selection
+        function toggleKeyword(button) {
+          const keyword = button.getAttribute('data-keyword');
+          button.classList.toggle('selected');
+          const index = activeKeywords.indexOf(keyword);
+          if (index > -1) {
+            activeKeywords.splice(index, 1);
+          } else {
+            activeKeywords.push(keyword);
+          }
+          updateVideos();
+        }
+    
+        // Update videos based on active keywords
+        async function updateVideos() {
+  const searchQuery = activeKeywords.join(' ');
+  const videoId = new URLSearchParams(window.location.search).get("vId");
 
-            ></iframe>
-            <a href="./watch.html?vId=${item?.id.videoId}" class="backdrop">
-            </a>
-            <p>${item?.snippet.title}</p>
-            `;
+  try {
+    // Fetch videos from YouTube API using the search query
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${encodeURIComponent(searchQuery)}&maxResults=12&key=${API_KEY}`);
+    const data = await response.json();
 
-        players.push(
-          new YT.Player(`player-${index + 1}`, {
-            height: "200",
-            width: "360",
-            videoId: item?.id.videoId,
-          })
-        );
-      });
-    };
-    document.getElementById('shareButton').addEventListener('click', function () {
+    // Filter out the main video from the side videos
+    const sideVideos = data.items.filter(item => item.id.videoId !== videoId);
+
+    // Clear the current videos
+    const sideVideosRef = document.getElementById("side-videos");
+    sideVideosRef.innerHTML = '';
+
+    // Loop through each side video item and create its HTML
+    sideVideos.forEach((item, index) => {
+      const videoDiv = document.createElement('div');
+      videoDiv.id = `side-video-player-${index + 1}`;
+      videoDiv.className = 'video';
+      videoDiv.innerHTML = `
+        <iframe
+          width="240" height="160"
+          src="https://www.youtube.com/embed/${item.id.videoId}?enablejsapi=1"
+          frameborder="0"
+        ></iframe>
+        <a href="./watch.html?vId=${item.id.videoId}&keywords=${encodeURIComponent(activeKeywords.join(','))}" class="backdrop">
+        </a>
+        <p>${item.snippet.title}</p>
+      `;
+
+      sideVideosRef.appendChild(videoDiv);
+    });
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+  }
+}
+
+
+  function createPlayerIframe(video) {
+  const playerTitleRef = document.getElementById('player-title');
+  const playerRef = document.getElementById('player');
+  
+  playerTitleRef.innerHTML = video.snippet.title;
+  playerRef.innerHTML = `
+    <iframe
+      width="1080" height="600"
+      src="https://www.youtube.com/embed/${video.id}?enablejsapi=1&origin=http://127.0.0.1:5500/"
+      frameborder="0"
+    ></iframe>
+  `;
+
+  new YT.Player('player', {
+    height: '1080',
+    width: '600',
+    videoId: video.id,
+    events: {
+      onReady: onPlayerReady,
+    },
+  });
+}
+
+  try {
+    // Fetch videos from YouTube API using the search query
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${encodeURIComponent(searchQuery)}&maxResults=12&key=${API_KEY}`);
+    const data = await response.json();
+
+    // Clear the current videos
+    const sideVideosRef = document.getElementById("side-videos");
+    sideVideosRef.innerHTML = '';
+
+    // Loop through each video item and create its HTML
+    data.items.forEach((item, index) => {
+      const videoDiv = document.createElement('div');
+      videoDiv.id = `side-video-player-${index + 1}`;
+      videoDiv.className = 'video';
+      videoDiv.innerHTML = `
+        <iframe
+          width="240" height="160"
+          src="https://www.youtube.com/embed/${item.id.videoId}?enablejsapi=1"
+          frameborder="0"
+        ></iframe>
+        <a href="./watch.html?vId=${item.id.videoId}&keywords=${encodeURIComponent(activeKeywords.join(','))}" class="backdrop">
+        </a>
+        <p>${item.snippet.title}</p>
+      `;
+
+      sideVideosRef.appendChild(videoDiv);
+    });
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+  }
+
+  document.getElementById('shareButton').addEventListener('click', function () {
       const videoId = new URLSearchParams(window.location.search).get('vId');
       if (videoId) {
         const shareUrl = `${window.location.origin}${window.location.pathname}?vId=${videoId}`;
@@ -248,8 +329,9 @@
         alert('No video is being played to share.');
       }
     });
-  </script>
-  <script src="notesHandler.js"></script>
-</body>
-
+    
+    </script>
+    
+    <script src="notesHandler.js"></script>
+  </body>
 </html>
