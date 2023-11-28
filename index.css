@@ -1,0 +1,23 @@
+#keywords-container {
+    margin-bottom: 10px;
+}
+#video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-gap: 20px; /* space between videos */
+    margin: 20px; /* margin around the grid */
+}
+.video-item {
+    width: 100%; /* Full width of the column */
+}
+.keyword {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+.keyword.selected {
+    background-color: #cef;
+    border-color: #08f;
+}
