@@ -55,15 +55,24 @@
     
     let activeKeywords = [];
 
+
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.keyword').forEach(button => {
     button.addEventListener('click', function() {
       toggleKeyword(this);
     });
+
+    // Select SQL keyword by default
+    if (button.getAttribute('data-keyword') === 'SQL') {
+      button.classList.add('selected');
+      activeKeywords.push('SQL');
+    }
   });
 
-
   document.getElementById('search-container').querySelector('button').addEventListener('click', addKeyword);
+
+  // Perform initial search with SQL keyword
+  performSearch();
 });
 
 function toggleKeyword(button) {
