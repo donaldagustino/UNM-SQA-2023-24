@@ -1,0 +1,113 @@
+* {
+    margin: 0px;
+    font-family: Arial;
+}
+
+#player {
+    width: 1080px;
+    height: 600px;
+    margin: 24px;
+}
+
+/* Add styles for a button */
+#saveNoteButton {
+/* Style your button */
+    padding: 10px 20px;
+    margin-top: 10px; /* Add some space above the button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#saveNoteButton:hover {
+    background-color: #0056b3;
+}
+
+#shareButton {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#shareButton:hover {
+    background-color: rgb(60, 179, 0);
+}
+
+#side-videos {
+    width: 300px;
+    margin: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#videoNotes {
+    width: 100%; /* Make the textarea take up the full width of its container */
+    resize: vertical; /* Allow only vertical resizing */
+    /* Other styles as necessary */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notes-section {
+    width: 97.5%; /* Match the width of video player */
+    margin: 10px auto; /* Center the notes-section with automatic horizontal margins */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+    /* Other styles as necessary */
+}
+
+.keyword {
+    /* Apply the current .keyword.selected styles to all keywords by default */
+    background-color: #cef; /* Example background color */
+    border-color: #08f;    /* Example border color */
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /* Add other styling as needed */
+}
+
+.keyword.selected {
+    /* Subdued style for unselected keywords */
+    background-color: #f8f8f8; /* More neutral background color */
+    border-color: #ccc;       /* Standard border color */
+    /* Adjust other styles as needed */
+}
+
+.wrapper-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.video {
+    margin: 8px;
+    position: relative;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.video .backdrop {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 10%;
+    position: absolute;
+    top: 0px;
+}
