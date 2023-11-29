@@ -1,10 +1,11 @@
 /*
-Test Case 1:  Opening the main user interface 
+ID: TC001
+Test Case 1:
+Opening the main user interface 
 displays 12 YouTube videos with thumbnails and titles.
 
- Pre-Condition: User has accessed the main page of the
+Pre-Condition: User has accessed the main page of the
 application.
-
 
 Procedure:
 • 	Open the web application.

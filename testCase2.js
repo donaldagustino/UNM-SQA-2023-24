@@ -1,5 +1,7 @@
 /*
-Test Case 2: Ensure that clicking on the video thumbnail or title 
+ID: TC002
+Test Case 2: 
+Ensure that clicking on the video thumbnail or title 
 brings the user to the dedicated player area, 
 within the same tab with a sidebar for other videos.
 
@@ -10,9 +12,9 @@ Procedure:
 • 	Click on the thumbnail of any displayed video.
 • 	Observe the navigation and layout change.
 
-Expected Result: The application navigates to a
-dedicated player area within the same tab, and a sidebar with
-other videos are visible.
+Expected Result: The application navigates to a dedicated player area 
+within the same tab, 
+and a sidebar with other videos are visible.
 */ 
 
 const { Builder, By, Key, until } = require('selenium-webdriver');
