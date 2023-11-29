@@ -1,5 +1,6 @@
-// notesHandler.js
+// notesHandler.js -Used to control note saving and note sharing
 
+//User clicks on the 'Save Notes Button'
 document.addEventListener('DOMContentLoaded', (event) => {
     const videoId = new URLSearchParams(window.location.search).get("vId");
 
@@ -16,7 +17,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
         // Show toast message instead of an alert
         showToast('Notes saved!');
+        console.log('Notes was successfully saving!');
     });
+});
+
+//User clicks on the 'Share Button'
+document.getElementById('shareButton').addEventListener('click', function () {
+    const videoId = new URLSearchParams(window.location.search).get('vId');
+    if (videoId) {
+      const shareUrl = `${window.location.origin}${window.location.pathname}?vId=${videoId}`;
+      navigator.clipboard.writeText(shareUrl).then(function () {         
+        // Copies the shareable URL to the clipboard
+        // Show toast message instead of an alert
+        showToast('Notes copied!');
+        console.log('Notes was successfully copied to clipboard!');
+      }, 
+      function (err) {                                                
+        //alert('Link copied to clipboard!');
+        console.error('Could not copy text: ', err);
+      });
+    } else {
+      alert('No video is being played to share.');
+    }
 });
 
 // Function to show toast message
