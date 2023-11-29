@@ -1,0 +1,25 @@
+{
+  "name": "unm-sqa-2023-24",
+  "version": "1.0.0",
+  "description": "Selenium Use Case Testing for SQA Module",
+  "main": "notesHandler.js",
+  "scripts": {
+    "test": "node testCase1.js && node testCase2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donaldagustino/UNM-SQA-2023-24.git"
+  },
+  "keywords": [
+    "SQA_UseCase_Testing"
+  ],
+  "author": "SQA_Group 7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donaldagustino/UNM-SQA-2023-24/issues"
+  },
+  "homepage": "https://github.com/donaldagustino/UNM-SQA-2023-24#readme",
+  "dependencies": {
+    "selenium-webdriver": "^4.15.0"
+  }
+}
