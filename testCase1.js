@@ -24,7 +24,7 @@ const assert = require('assert');
 
   try {
     // Navigate to local web application's URL
-    await driver.get('http://127.0.0.1:5500/index.html'); // Update with the correct URL or file path
+    await driver.get('http://127.0.0.1:5500/index.html'); 
 
     // Wait until the video grid is populated with video items
     await driver.wait(until.elementsLocated(By.css('.video-item')), 10000);
