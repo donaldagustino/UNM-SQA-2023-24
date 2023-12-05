@@ -4,7 +4,7 @@
   "description": "Selenium Use Case Testing for SQA Module",
   "main": "notesHandler.js",
   "scripts": {
-    "test": "node testCase5.js"
+    "test": "node testCase6.js"
   },
   "repository": {
     "type": "git",

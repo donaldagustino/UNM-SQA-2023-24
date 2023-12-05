@@ -21,21 +21,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-//User clicks on the 'Share Button'
+// User clicks on the 'Share Button'
 document.getElementById('shareButton').addEventListener('click', function () {
-    const videoId = new URLSearchParams(window.location.search).get('vId');
-    if (videoId) {
+  const videoId = new URLSearchParams(window.location.search).get('vId');
+  if (videoId) {
+      // Construct the shareable URL
       const shareUrl = `${window.location.origin}${window.location.pathname}?vId=${videoId}`;
+
+      // Store in a hidden input or in the DOM for Selenium to access
+      const shareInput = document.createElement('input');
+      shareInput.type = 'hidden';
+      shareInput.id = 'shareUrl';
+      shareInput.value = shareUrl;
+      document.body.appendChild(shareInput);
+
+      //Allows User to copy URL
       navigator.clipboard.writeText(shareUrl).then(function () {         
-        // Copies the shareable URL to the clipboard
-        // Show toast message instead of an alert
-        showToast('Notes copied!');
-        console.log('Notes was successfully copied to clipboard!');
       }, 
       function (err) {                                                
         //alert('Link copied to clipboard!');
         console.error('Could not copy text: ', err);
       });
+
+      // Still show the toast message for user feedback
+      showToast('URL ready to be copied!');
+      
+      console.log('URL is ready to be copied:', shareUrl);
     } else {
       alert('No video is being played to share.');
     }

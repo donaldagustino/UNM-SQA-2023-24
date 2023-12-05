@@ -7,16 +7,17 @@ Pre-Condition: The user is at (watch.html) or has clicked on a video at main pag
 Procedure:
 1. Start playing a video.
 2. Enter text into the note-taking section.
-3. 	Save the note.
+3. Save the note.
 
 Test Data: Note content (e.g., "Interesting point at 02:15")
 
 Expected Result: The note is saved and associated with the video.
 */
 
-//node testCase1.js && node testCase2.js && node testCase3.js && node testCase4.js && node testCase5.js
+//Place the below line into package.json scripts
+//node testCase1.js && node testCase2.js && node testCase3.js && node testCase4.js && node testCase5.js && node testCase6.js
 
-/*
+
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const assert = require('assert');
 
@@ -35,6 +36,7 @@ const assert = require('assert');
 
     // Wait for watch.html page to load
     await driver.wait(until.urlContains('watch.html'), 10000);
+    
     // Wait for dynamic content to be visible
     await driver.wait(until.elementLocated(By.css('.notes-section')), 10000); // Wait for notes section
     await driver.wait(until.elementLocated(By.id('player')), 10000); // Wait for video player
@@ -46,14 +48,29 @@ const assert = require('assert');
     // Step 2: Enter text into the note-taking section
     const noteInput = await driver.findElement(By.id('videoNotes'));
     const testNote = "Interesting point at 02:15";
-    await noteInput.sendKeys(testNote);
+
+    // Scroll the note input into view
+    await driver.executeScript("arguments[0].scrollIntoView(true);", noteInput);
+
+    // Set the note content with JavaScript
+    await driver.executeScript("arguments[0].value = arguments[1];", noteInput, testNote);
 
     // Step 3: Save the note
     const saveNoteButton = await driver.findElement(By.id('saveNoteButton'));
-    await saveNoteButton.click();
+    // Scroll the save button into view
+    await driver.executeScript("arguments[0].scrollIntoView(true);", saveNoteButton);
+    // Use JavaScript to click the button if normal click doesn't work
+    await driver.executeScript("arguments[0].click();", saveNoteButton);
+    // Wait for the note to be saved
+    await driver.sleep(5000); // Increase wait time if necessary
+
+    // Verification: Retrieve the video ID from the URL
+    const currentUrl = await driver.getCurrentUrl();
+    const urlParams = new URLSearchParams(currentUrl);
+    const videoId = urlParams.get('vId');
 
     // Verification: Check if the note is saved to local storage
-    const savedNote = await driver.executeScript("return window.localStorage.getItem('savedNote');");
+    const savedNote = await driver.executeScript("return window.localStorage.getItem(arguments[0]);", 'videoNotes-' + videoId);
     assert.strictEqual(savedNote, testNote, 'The note content should be saved.');
 
     console.log('Test Case TC005 Passed: The note is saved and associated with the video.');
@@ -64,4 +81,3 @@ const assert = require('assert');
     await driver.quit();
   }
 })();
-*/
